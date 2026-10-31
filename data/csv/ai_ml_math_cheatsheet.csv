@@ -1,0 +1,17 @@
+Domain,Concept,Formula / Representation,Description & Importance in AI/ML
+Linear Algebra,Matrix Multiplication,"C = A * B, where C_ij = sum(A_ik * B_kj)","Fundamental operation for changing coordinate spaces, processing batches, and calculating layer activations in neural networks."
+Linear Algebra,Eigenvalues and Eigenvectors,A * v = lambda * v,Used in Principal Component Analysis (PCA) for dimensionality reduction and understanding matrix transformations.
+Linear Algebra,Singular Value Decomposition (SVD),A = U * Sigma * V^T,"Decomposes any matrix into rotation and scaling matrices. Vital for recommendation engines, latent semantic analysis, and data compression."
+Linear Algebra,Vector Norms (L1 & L2),"L1: ||x||_1 = sum(|x_i|), L2: ||x||_2 = sqrt(sum(x_i^2))",Measures vector magnitudes. Used extensively in regularization (Lasso and Ridge) to prevent overfitting.
+Calculus,Derivative / Gradient,"nabla f = [df/dx_1, df/dx_2, ..., df/dx_n]",Calculates the direction of steepest ascent. Forms the mathematical bedrock of optimization algorithms like Gradient Descent.
+Calculus,Chain Rule (Multivariate),dz/dx = (dz/dy) * (dy/dx),Allows calculation of derivatives of composite functions. Directly powers the Backpropagation algorithm in Deep Learning.
+Calculus,Jacobian and Hessian Matrices,"Jacobian: J_ij = df_i/dx_j, Hessian: H_ij = d^2f / (dx_i * dx_j)","Jacobian represents first-order partial derivatives. Hessian tracks second-order derivatives, crucial for advanced optimization methods like Newton's method."
+Probability & Statistics,Bayes' Theorem,P(A|B) = [P(B|A) * P(A)] / P(B),"Calculates conditional probability. Underpins Naive Bayes classifiers, Bayesian optimization, and probabilistic neural networks."
+Probability & Statistics,Expectation and Variance,"E[X] = sum(x * P(x)), Var(X) = E[(X - E[X])^2]","Expectation determines average outcomes, while Variance tracks data spread. Critical for data normalization, initialization strategies, and stochastic policies."
+Probability & Statistics,Gaussian (Normal) Distribution,f(x) = (1 / (sigma * sqrt(2*pi))) * exp(-0.5 * ((x-mu)/sigma)^2),"The most common distribution assumption. Used in weight initialization, Variational Autoencoders (VAEs), and Diffusion models."
+Probability & Statistics,Covariance Matrix,Sigma_ij = E[(X_i - mu_i)(X_j - mu_j)],Quantifies linear relationships between multiple random variables. Highly critical for multi-feature scaling and PCA.
+Optimization & Loss Functions,Gradient Descent Update Rule,theta_new = theta_old - alpha * nabla L(theta),Iteratively updates model parameters (weights) to minimize a given loss function L using a learning rate alpha.
+Optimization & Loss Functions,Mean Squared Error (MSE),L = (1/n) * sum((y_actual - y_pred)^2),Standard loss metric for regression tasks. Penalizes larger errors more heavily due to the squaring operation.
+Optimization & Loss Functions,Binary Cross-Entropy Loss,L = - (y * log(p) + (1 - y) * log(1 - p)),Standard loss metric for binary classification tasks. Measures the divergence between two probability distributions.
+Information Theory,Shannon Entropy,H(X) = - sum(P(x_i) * log_2(P(x_i))),Quantifies the uncertainty or information content in a random variable. Basis for building Decision Trees.
+Information Theory,Kullback-Leibler (KL) Divergence,D_KL(P || Q) = sum(P(x) * log(P(x) / Q(x))),Measures how much one probability distribution P differs from a reference distribution Q. Central to VAEs and GAN training.

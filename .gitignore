@@ -1,0 +1,17 @@
+.env
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Generated vector indexes
+faiss_store/
+data/vector_store/
+data/pdf/
+
+# Local/editor files
+.vscode/
+notebook/
+RAG`/
+.hallmark/

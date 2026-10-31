@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ask questions about your document collection and read answers with their source pages.">
+  <title>Document desk · Ask your documents</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* Hallmark · v2.0.0 · theme: blueprint · genre: modern-minimal · material: product · shape: workbench · posture: drenched · signature: answer register with source rows */
+    /* Hallmark · pre-emit critique: P5 H5 E4 S5 R5 V4 · weakest: E, kept the live request states visible in the workbench */
+    :root {
+      --color-paper: oklch(35% 0.105 256);
+      --color-paper-2: oklch(31% 0.10 257);
+      --color-paper-3: oklch(26.5% 0.095 258);
+      --color-ink: oklch(97% 0.012 240);
+      --color-ink-2: oklch(90% 0.025 242);
+      --color-muted: oklch(80% 0.045 244);
+      --color-rule: oklch(93% 0.02 240 / 0.85);
+      --color-rule-2: oklch(93% 0.02 240 / 0.32);
+      --color-grid: oklch(97% 0.01 240 / 0.09);
+      --color-focus: oklch(97% 0.012 240);
+      --color-error: oklch(88% 0.11 25);
+      --font-display: "Chakra Petch", ui-sans-serif, sans-serif;
+      --font-body: "IBM Plex Sans", ui-sans-serif, sans-serif;
+      --font-outlier: "IBM Plex Mono", ui-monospace, monospace;
+      --text-display: clamp(3.2rem, 7vw, 6rem);
+      --text-section: clamp(2rem, 4vw, 3.25rem);
+      --text-title: 1.35rem;
+      --text-lead: 1.2rem;
+      --text-md: 1rem;
+      --text-sm: .875rem;
+      --space-xs: .5rem;
+      --space-sm: .75rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+      --container: 1440px;
+      --gutter: clamp(1rem, 4vw, 4rem);
+      --gap: clamp(1rem, 2.2vw, 2rem);
+      --rule-hair: 1px;
+      --rule-heavy: 2px;
+    }
+
+    html, body { overflow-x: clip; }
+    html { background: var(--color-paper); }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background-color: var(--color-paper);
+      background-image: linear-gradient(var(--color-grid) 1px, transparent 1px), linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
+      background-size: 24px 24px;
+      color: var(--color-ink);
+      font: 400 var(--text-md)/1.55 var(--font-body);
+      font-synthesis: none;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    button, textarea { font: inherit; }
+    a { color: var(--color-ink); }
+    .shell { width: min(100% - (var(--gutter) * 2), var(--container)); margin-inline: auto; }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 76px;
+      border-bottom: var(--rule-hair) solid var(--color-rule);
+    }
+    .wordmark {
+      color: var(--color-ink);
+      font: 600 1rem/1 var(--font-display);
+      letter-spacing: .02em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .topbar__meta { color: var(--color-muted); font-size: var(--text-sm); }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: var(--gap);
+      align-items: end;
+      min-height: min(650px, calc(100dvh - 76px));
+      padding-block: var(--space-3xl);
+      border-bottom: var(--rule-heavy) solid var(--color-rule);
+    }
+    h1, h2, h3 { margin: 0; color: var(--color-ink); font-family: var(--font-display); font-weight: 600; overflow-wrap: break-word; min-width: 0; text-transform: uppercase; text-wrap: balance; }
+    h1 { max-width: 8ch; font-size: var(--text-display); letter-spacing: -.012em; line-height: 1.02; }
+    h2 { font-size: var(--text-section); letter-spacing: -.012em; line-height: 1.02; }
+    h3 { font-size: var(--text-title); line-height: 1.15; text-transform: none; }
+    p { max-width: 65ch; }
+    .hero__copy { display: grid; gap: var(--space-xl); }
+    .hero__intro { max-width: 34ch; margin: 0; color: var(--color-ink-2); font-size: var(--text-lead); }
+    .hero__note { margin: 0; color: var(--color-muted); font-size: var(--text-sm); }
+    .query-sheet {
+      display: grid;
+      gap: var(--space-lg);
+      border: var(--rule-hair) solid var(--color-rule);
+      background: var(--color-paper-2);
+      padding: var(--space-xl);
+      position: relative;
+    }
+    .query-sheet::after, .register::after {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border: var(--rule-hair) solid var(--color-rule-2);
+      pointer-events: none;
+    }
+    .field-label, .section-kicker, .source-meta, .status, .source-index {
+      color: var(--color-muted);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+    }
+    .field-label { display: block; margin-bottom: var(--space-xs); }
+    .query-field {
+      width: 100%;
+      min-height: 140px;
+      border: var(--rule-hair) solid var(--color-rule);
+      outline: 2px solid transparent;
+      outline-offset: -3px;
+      resize: vertical;
+      background: var(--color-paper-3);
+      color: var(--color-ink);
+      padding: var(--space-md);
+      line-height: 1.5;
+    }
+    .query-field::placeholder { color: var(--color-muted); }
+    .query-field:hover { background: var(--color-paper); }
+    .query-field:focus-visible { outline-color: var(--color-focus); }
+    .query-sheet__footer { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); }
+    .char-count { color: var(--color-muted); font: 500 var(--text-sm)/1 var(--font-outlier); }
+    .btn {
+      min-height: 48px;
+      border: var(--rule-hair) solid var(--color-rule);
+      background: var(--color-paper-3);
+      color: var(--color-ink);
+      padding: 0 var(--space-lg);
+      cursor: pointer;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: background-color .16s ease, transform .16s ease;
+    }
+    .btn:hover { background: var(--color-paper-2); }
+    .btn:active { transform: translateY(1px); }
+    .btn:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+    .btn:disabled { background: var(--color-paper-3); border-color: var(--color-muted); color: var(--color-muted); cursor: progress; }
+    .workspace { padding-block: var(--space-3xl); }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: var(--gap); margin-bottom: var(--space-xl); }
+    .section-kicker { margin: 0 0 var(--space-xs); }
+    .status { margin: 0; text-align: right; }
+    .status[data-state="error"] { color: var(--color-error); }
+    .register {
+      position: relative;
+      border: var(--rule-hair) solid var(--color-rule);
+      background: var(--color-paper-2);
+    }
+    .answer {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+      gap: var(--gap);
+      padding: var(--space-xl);
+      border-bottom: var(--rule-hair) solid var(--color-rule-2);
+    }
+    .answer__text { margin: 0; max-width: 70ch; color: var(--color-ink-2); font-size: 1.1rem; white-space: pre-wrap; }
+    .answer__label { margin: 0 0 var(--space-sm); color: var(--color-muted); font-size: var(--text-sm); }
+    .sources { padding: var(--space-lg) var(--space-xl); }
+    .sources__head { display: flex; justify-content: space-between; gap: var(--space-md); padding-bottom: var(--space-sm); border-bottom: var(--rule-heavy) solid var(--color-rule); }
+    .sources__head h3 { font-size: 1rem; }
+    .source-list { list-style: none; margin: 0; padding: 0; }
+    .source-row { display: grid; grid-template-columns: 2.2rem minmax(0, 1fr) auto; gap: var(--space-md); align-items: start; padding: var(--space-md) 0; border-bottom: var(--rule-hair) solid var(--color-rule-2); }
+    .source-row:last-child { border-bottom: 0; }
+    .source-index { font-family: var(--font-outlier); }
+    .source-name { margin: 0; color: var(--color-ink); font-weight: 500; overflow-wrap: break-word; }
+    .source-snippet { margin: .25rem 0 0; color: var(--color-muted); font-size: var(--text-sm); }
+    .source-meta { white-space: nowrap; text-align: right; }
+    .empty { padding: var(--space-2xl) var(--space-xl); color: var(--color-muted); }
+    .empty p { margin: 0; }
+    [hidden] { display: none; }
+    @media (max-width: 60rem) {
+      .hero, .answer { grid-template-columns: 1fr; }
+      .hero { min-height: auto; padding-block: var(--space-2xl); }
+      .query-sheet { padding: var(--space-lg); }
+    }
+    @media (max-width: 40rem) {
+      .topbar { min-height: 64px; }
+      .topbar__meta { display: none; }
+      .hero { gap: var(--space-2xl); padding-block: var(--space-2xl); }
+      h1 { max-width: 9ch; font-size: clamp(2.8rem, 15vw, 4.5rem); }
+      .query-sheet { padding: var(--space-md); }
+      .query-sheet__footer, .section-head { align-items: flex-start; flex-direction: column; }
+      .status { text-align: left; }
+      .sources { padding-inline: var(--space-md); }
+      .answer { padding: var(--space-lg) var(--space-md); }
+      .source-row { grid-template-columns: 1.75rem minmax(0, 1fr); }
+      .source-meta { grid-column: 2; text-align: left; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .btn { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar shell">
+    <a class="wordmark" href="/">Document desk</a>
+    <span class="topbar__meta">retrieval workspace / ready</span>
+  </header>
+
+  <main class="shell">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero__copy">
+        <h1 id="page-title">Ask your DOCs.</h1>
+        <p class="hero__intro">Ask a PDF question. Read the answer with its source pages.</p>
+        <p class="hero__note">Three nearest source passages are returned with every answer.</p>
+      </div>
+      <form class="query-sheet" id="ask-form">
+        <div>
+          <label class="field-label" for="query">Your question</label>
+          <textarea class="query-field" id="query" name="query" maxlength="1000" required placeholder="What does the research say about…"></textarea>
+        </div>
+        <div class="query-sheet__footer">
+          <span class="char-count" id="char-count">0 / 1000</span>
+          <button class="btn" id="ask-button" type="submit">Ask the collection</button>
+        </div>
+        <p class="status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="workspace" aria-labelledby="answer-heading">
+      <div class="section-head">
+        <div>
+          <h2 id="answer-heading">Your answer</h2>
+        </div>
+        <p class="status" id="result-status">Waiting for a question</p>
+      </div>
+      <div class="register" id="result">
+        <div class="empty" id="empty-state">
+          <p>Ask something specific to begin. Your answer and page references will appear here.</p>
+        </div>
+        <div id="answer-state" hidden>
+          <div class="answer">
+            <div>
+              <p class="answer__label">Synthesized answer</p>
+              <p class="answer__text" id="answer-text"></p>
+            </div>
+          </div>
+          <div class="sources">
+            <div class="sources__head">
+              <h3>Source pages</h3>
+              <span class="source-meta" id="source-count"></span>
+            </div>
+            <ol class="source-list" id="source-list"></ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const form = document.querySelector("#ask-form");
+    const queryInput = document.querySelector("#query");
+    const askButton = document.querySelector("#ask-button");
+    const charCount = document.querySelector("#char-count");
+    const formStatus = document.querySelector("#form-status");
+    const resultStatus = document.querySelector("#result-status");
+    const emptyState = document.querySelector("#empty-state");
+    const answerState = document.querySelector("#answer-state");
+    const answerText = document.querySelector("#answer-text");
+    const sourceList = document.querySelector("#source-list");
+    const sourceCount = document.querySelector("#source-count");
+
+    function setStatus(message, state) {
+      formStatus.textContent = message;
+      formStatus.dataset.state = state || "";
+      resultStatus.textContent = message;
+      resultStatus.dataset.state = state || "";
+    }
+
+    function renderSources(sources) {
+      sourceList.replaceChildren();
+      sources.forEach((source, index) => {
+        const row = document.createElement("li");
+        row.className = "source-row";
+        const page = source.page == null ? "page not listed" : `page ${source.page}`;
+        const distance = source.distance == null ? "" : ` · distance ${source.distance}`;
+        row.innerHTML = `
+          <span class="source-index">${String(index + 1).padStart(2, "0")}</span>
+          <div>
+            <p class="source-name">${escapeHtml(source.file || "Unnamed document")}</p>
+            <p class="source-snippet">${escapeHtml(source.text || "No snippet returned.")}</p>
+          </div>
+          <span class="source-meta">${page}${distance}</span>
+        `;
+        sourceList.append(row);
+      });
+      sourceCount.textContent = `${sources.length} ${sources.length === 1 ? "source" : "sources"}`;
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (character) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+      }[character]));
+    }
+
+    queryInput.addEventListener("input", () => {
+      charCount.textContent = `${queryInput.value.length} / 1000`;
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const query = queryInput.value.trim();
+      if (!query) {
+        setStatus("Write a question before asking.", "error");
+        queryInput.setAttribute("aria-invalid", "true");
+        queryInput.focus();
+        return;
+      }
+
+      queryInput.removeAttribute("aria-invalid");
+      askButton.disabled = true;
+      askButton.setAttribute("aria-busy", "true");
+      askButton.textContent = "Reading…";
+      setStatus("Searching the collection…", "loading");
+
+      try {
+        const response = await fetch("/api/ask", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query, top_k: 3 })
+        });
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          throw new Error(payload.detail || "The document service did not return an answer.");
+        }
+        answerText.textContent = payload.answer || "The service returned no answer.";
+        renderSources(Array.isArray(payload.sources) ? payload.sources : []);
+        emptyState.hidden = true;
+        answerState.hidden = false;
+        setStatus("Answer ready", "success");
+      } catch (error) {
+        emptyState.hidden = false;
+        answerState.hidden = true;
+        emptyState.innerHTML = `<p>${escapeHtml(error.message || "The request failed. Try again.")}</p>`;
+        setStatus("Could not reach the document service.", "error");
+      } finally {
+        askButton.disabled = false;
+        askButton.removeAttribute("aria-busy");
+        askButton.textContent = "Ask the collection";
+      }
+    });
+  </script>
+</body>
+</html>

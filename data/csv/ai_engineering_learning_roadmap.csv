@@ -1,0 +1,14 @@
+Category,Skill/Topic,Importance,Resources/Action Item
+Foundational Math,Linear Algebra,High,"MIT OCW 18.06 by Gilbert Strang, Kahn Academy"
+Foundational Math,Calculus (Multivariate),High,"Partial derivatives, gradients, chain rule (3Blue1Brown YouTube)"
+Foundational Math,Probability & Statistics,High,"Bayes' Theorem, distributions, hypothesis testing (Penn State STAT 414)"
+Programming & Software,Python Programming,Critical,"Fluent Python book, LeetCode (Data Structures & Algorithms)"
+Programming & Software,Data Manipulation,High,"Pandas, NumPy, Scikit-Learn libraries documentation & projects"
+Programming & Software,Software Engineering,High,"Git/GitHub, Docker, CI/CD pipelines, API development (FastAPI)"
+Core Machine Learning,Classical ML Algorithms,High,Andrew Ng's Machine Learning Specialization (Coursera)
+Deep Learning,Neural Network Basics,Critical,Deep Learning Specialization by DeepLearning.AI
+Deep Learning,Frameworks,Critical,PyTorch (Highly recommended for research/industry) or TensorFlow
+Generative AI & LLMs,Transformers Architecture,Critical,"'Attention Is All You Need' paper, Hugging Face NLP Course"
+Generative AI & LLMs,LLM Fine-Tuning & RAG,High,"Retrieval-Augmented Generation architectures, LoRA, QLoRA tuning"
+AI Security,Adversarial Robustness,Medium,"MITRE ATLAS framework, OWASP Top 10 for LLMs"
+Practical MLOps,Model Deployment,High,"AWS/GCP/Azure AI tools, Triton Inference Server, MLflow"
