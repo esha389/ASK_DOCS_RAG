@@ -1,6 +1,13 @@
 # Ask Docs RAG
 
-A lightweight retrieval-augmented generation app for asking questions about local documents and reading answers with source pages.
+Ask questions about your PDFs and get answers with the pages they came from.
+
+## How it works
+PDFs → chunks → embeddings → FAISS search → Groq LLM → answer + sources
+
+
+https://github.com/user-attachments/assets/f80c9177-4700-42e9-80dd-51f9091e2013
+
 
 ## What it includes
 
